@@ -1,25 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import useAuth from './hooks/useAuth';
+import Login from './components/Auth/Login';
+import UserList from './components/Users/UserList';
+import UserEdit from './components/Users/UserEdit';
+import Layout from './components/Layout/Layout';
+import { ROUTES } from './utils/constants';
 
-function App() {
+// Protected route component
+const ProtectedRoute = ({ children }) => {
+  const { isAuth, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    );
+  }
+
+  if (!isAuth) {
+    return <Navigate to={ROUTES.LOGIN} replace />;
+  }
+
+  return children;
+};
+
+const AppRoutes = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path={ROUTES.LOGIN} element={<Login />} />
+      <Route
+        path={ROUTES.USERS}
+        element={
+          <ProtectedRoute>
+            <UserList />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={ROUTES.EDIT_USER}
+        element={
+          <ProtectedRoute>
+            <UserEdit />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} />
+    </Routes>
   );
-}
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AuthProvider>
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </AuthProvider>
+    </Router>
+  );
+};
 
 export default App;
