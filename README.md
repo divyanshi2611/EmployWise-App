@@ -29,28 +29,6 @@ Password: cityslicka
 - React Router DOM
 - Vercel (Hosting)
 
-# Project Structure
-
-src/
-├── components/
-│   ├── Login.jsx
-│   ├── UserList.jsx
-│   ├── UserCard.jsx
-│   ├── UserEdit.jsx
-│   ├── UserSearch.jsx
-│   └── UI/
-│       ├── Loader.jsx
-│       ├── Pagination.jsx
-│       └── Alert.jsx
-├── services/
-│   ├── api.js
-│   └── authService.js
-├── hooks/
-│   ├── useAuth.js
-│   └── useUsers.js
-└── utils/
-    └── constants.js
-
 # Setup Instructions
 
 ```bash
