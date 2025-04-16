@@ -9,7 +9,9 @@ View Live App : https://your-deployed-url.vercel.app
 # Test Credentials
 
 Use the credentials below to log in and test the application:
+
 Email: eve.holt@reqres.in 
+
 Password: cityslicka
 
 # Features
@@ -31,16 +33,15 @@ Password: cityslicka
 
 src/
 ├── components/
-|
 │   ├── Login.jsx
-|   |
 │   ├── UserList.jsx
 │   ├── UserCard.jsx
 │   ├── UserEdit.jsx
-│   ├── UI/
-│   │   ├── Loader.jsx
-│   │   ├── Pagination.jsx
-│   │   └── Alert.jsx
+│   ├── UserSearch.jsx
+│   └── UI/
+│       ├── Loader.jsx
+│       ├── Pagination.jsx
+│       └── Alert.jsx
 ├── services/
 │   ├── api.js
 │   └── authService.js
